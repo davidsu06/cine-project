@@ -1,3 +1,5 @@
 rootProject.name = 'cine_project'
 
 include 'service-movies'
+include 'service-user'
+
