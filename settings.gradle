@@ -1,1 +1,3 @@
 rootProject.name = 'cine_project'
+
+include 'service-user'
