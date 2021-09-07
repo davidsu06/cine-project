@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 import java.util.List;
@@ -17,18 +18,15 @@ import java.util.Objects;
 public class Showtime {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", nullable = false, unique = true)
+  @Column(name="id", updatable = false, nullable = false, unique = true)
   private Long id;
 
-  @Column(name = "date", nullable = false)
-  @NotEmpty(message = "La fecha de la reserva es obligatoria")
+  @Column(name = "date")
   private Date date;
 
-  @Column(name = "movies")
-  @JoinColumn(name = "movie_id")
-  @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-  @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-  private List<Object> movies;
+  @Valid
+  @ElementCollection(targetClass = Long.class)
+  private List<Long> movies;
 
   @Override
   public boolean equals(Object o) {
