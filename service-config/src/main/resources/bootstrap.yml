@@ -1,0 +1,14 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: service-config
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/Gondax27/config-cine_project.git
+  security:
+    user:
+      name: ${CONFIG_NAME}
+      password: ${CONFIG_PASS}
