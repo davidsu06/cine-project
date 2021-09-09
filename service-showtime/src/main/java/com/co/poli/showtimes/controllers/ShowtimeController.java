@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping(value = "showtime")
+@RequestMapping(value = "/showtimes")
 public class ShowtimeController {
   private  final ShowtimeService showtimeService;
 
