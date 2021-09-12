@@ -3,7 +3,9 @@ package co.com.poli.servicemovies;
 import com.example.multimodule.service.MyService;
 import com.example.multimodule.service.utils.ResponseBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
 public class BeansConfiguration {
   @Bean
   public MyService myService() {
@@ -15,5 +17,3 @@ public class BeansConfiguration {
     return new ResponseBuilder();
   }
 }
-
-

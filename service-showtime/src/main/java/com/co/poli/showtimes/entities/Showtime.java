@@ -1,17 +1,20 @@
 package com.co.poli.showtimes.entities;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.co.poli.showtimes.models.Movie;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Setter
-@Getter
+@Data
 @Table(name = "showtimes")
+@Builder(toBuilder = true)
+@AllArgsConstructor
+@NoArgsConstructor
 public class Showtime {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +27,9 @@ public class Showtime {
   @Column(name = "movies", nullable = false)
   @NotNull
   private Long[] movies;
+
+  @Transient
+  private List<Movie> moviesObj;
 
   @Override
   public boolean equals(Object o) {
