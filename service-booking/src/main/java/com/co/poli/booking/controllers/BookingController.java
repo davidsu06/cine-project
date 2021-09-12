@@ -47,9 +47,9 @@ public class BookingController {
     return ResponseEntity.ok(booking);
   }
 
-  @GetMapping("/Users/{userid}")
-  public ResponseEntity<Booking> findBookingByUserId (@PathVariable("userid") Long userId) {
-    Booking booking = bookingService.findBookingByUserId(userId);
+  @GetMapping("/users/{id}")
+  public ResponseEntity<Booking> findBookingByUserId (@PathVariable("id") Long userId) {
+    Booking booking = bookingService.findByUserId(userId);
     if (booking == null) {
       return ResponseEntity.noContent().build();
     }

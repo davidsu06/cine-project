@@ -36,7 +36,7 @@ public class BookingServiceImp implements BookingService {
   }
 
   @Override
-  public Booking findBookingByUserId(Long userId) {
+  public Booking findByUserId(Long userId) {
     return bookingRepository.findByUserId(userId);
   }
 }

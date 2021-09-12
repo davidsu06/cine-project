@@ -9,5 +9,5 @@ public interface BookingService {
   List<Booking> getAllBookings();
   Booking findBookingById(Long id);
   Booking deleteBooking(Long id);
-  Booking findBookingByUserId(Long userId);
+  Booking findByUserId(Long userId);
 }
