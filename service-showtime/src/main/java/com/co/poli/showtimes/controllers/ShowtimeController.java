@@ -2,6 +2,9 @@ package com.co.poli.showtimes.controllers;
 
 import com.co.poli.showtimes.entities.Showtime;
 import com.co.poli.showtimes.services.ShowtimeService;
+import com.example.multimodule.service.MyService;
+import com.example.multimodule.service.utils.Response;
+import com.example.multimodule.service.utils.ResponseBuilder;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -16,44 +19,46 @@ import java.util.List;
 @RequestMapping(value = "/showtimes")
 public class ShowtimeController {
   private  final ShowtimeService showtimeService;
+  private  final ResponseBuilder responseBuilder;
+  private  final MyService myService;
 
   @PostMapping
-  public ResponseEntity<Showtime> createShowtime (@Valid @RequestBody Showtime showtime, BindingResult result) {
+  public Response createShowtime (@Valid @RequestBody Showtime showtime, BindingResult result) {
     if (result.hasErrors()) {
-      return ResponseEntity.badRequest().build();
+      return responseBuilder.failed(myService.formatMessage(result));
     }
 
     showtimeService.createShowtime(showtime);
-    return ResponseEntity.ok(showtime);
+    return responseBuilder.success(showtime);
   }
 
   @GetMapping
-  public ResponseEntity<List<Showtime>> getListShowtime () {
+  public Response getListShowtime () {
     List<Showtime> listShowtime = showtimeService.getListShowtime();
 
     if (listShowtime.isEmpty()) {
-      return ResponseEntity.noContent().build();
+      return responseBuilder.failed(null);
     }
 
-    return ResponseEntity.ok(listShowtime);
+    return responseBuilder.success(listShowtime);
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<Showtime> findShowtimeById (@PathVariable("id") Long id) {
+  public Response findShowtimeById (@PathVariable("id") Long id) {
     Showtime showtime = showtimeService.getShowtimeById(id);
 
-    if (showtime == null) { return ResponseEntity.noContent().build(); }
+    if (showtime == null) { return responseBuilder.failed(null); }
 
-    return ResponseEntity.ok(showtime);
+    return responseBuilder.success(showtime);
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<Showtime> updateShowtime (@Valid @PathVariable("id") Long id, @RequestBody Showtime showtime, BindingResult result) {
+  public Response updateShowtime (@Valid @PathVariable("id") Long id, @RequestBody Showtime showtime, BindingResult result) {
     if (result.hasErrors()) {
-      return ResponseEntity.badRequest().build();
+      return responseBuilder.failed(result);
     }
 
     showtimeService.updateShowtime(id, showtime);
-    return ResponseEntity.ok(showtime);
+    return responseBuilder.success(showtime);
   }
 }
