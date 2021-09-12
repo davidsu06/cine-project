@@ -27,9 +27,9 @@ public class Booking {
   @NotNull(message = "El id de la programación es obligatorio")
   private Long showtimeId;
 
-  @Valid
-  @ElementCollection(targetClass = Long.class, fetch = FetchType.LAZY)
-  private List<Long> movies;
+  @Column(name = "movies", nullable = false)
+  @NotNull
+  private Long[] movies;
 
   @Override
   public boolean equals(Object o) {

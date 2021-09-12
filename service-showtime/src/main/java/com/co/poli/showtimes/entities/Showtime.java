@@ -1,14 +1,11 @@
 package com.co.poli.showtimes.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -24,9 +21,9 @@ public class Showtime {
   @Column(name = "date")
   private Date date;
 
-  @Valid
-  @ElementCollection(targetClass = Long.class)
-  private List<Long> movies;
+  @Column(name = "movies", nullable = false)
+  @NotNull
+  private Long[] movies;
 
   @Override
   public boolean equals(Object o) {

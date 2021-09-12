@@ -1,4 +1,4 @@
-package com.co.poli.user;
+package com.co.poli.showtimes;
 
 import com.example.multimodule.service.MyService;
 import com.example.multimodule.service.utils.ResponseBuilder;
