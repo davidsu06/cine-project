@@ -1,0 +1,22 @@
+ext {
+	set('springBootAdminVersion', "2.3.1")
+	set('springCloudVersion', "Hoxton.SR8")
+}
+
+dependencies {
+	// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-config
+	implementation 'org.springframework.cloud:spring-cloud-starter-config'
+
+	// https://mvnrepository.com/artifact/de.codecentric/spring-boot-admin-starter-server
+	implementation 'de.codecentric:spring-boot-admin-starter-server'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "de.codecentric:spring-boot-admin-dependencies:${springBootAdminVersion}"
+	}
+
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}

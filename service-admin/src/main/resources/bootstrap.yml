@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: service-admin
+  cloud:
+    config:
+      uri: http://localhost:9000
+      username: ${CONFIG_NAME}
+      password: ${CONFIG_PASS}
