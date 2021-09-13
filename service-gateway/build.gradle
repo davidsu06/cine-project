@@ -3,10 +3,8 @@ ext {
 }
 
 dependencies {
-	// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-config
 	implementation 'org.springframework.cloud:spring-cloud-starter-config'
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-	// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-gateway
 	implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
 
 }

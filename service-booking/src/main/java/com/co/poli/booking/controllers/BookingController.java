@@ -64,11 +64,13 @@ public class BookingController {
 
   @DeleteMapping("/{id}")
   public Response deleteBooking (@PathVariable("id") Long id) {
-    Booking booking = bookingService.deleteBooking(id);
+    Booking booking = bookingService.findBookingById(id);
+
     if (booking == null) {
       return responseBuilder.failed(null);
     }
 
+    bookingService.deleteBooking(id);
     return responseBuilder.success(booking);
   }
 }
