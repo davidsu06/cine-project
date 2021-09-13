@@ -12,16 +12,16 @@ import java.util.Objects;
 @Setter
 @Getter
 public class User {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(nullable = false,unique = true)
   private Long id;
 
   @Column(name = "name", nullable = false)
-  @NotEmpty(message = "El nombre del usuario es obligatorio")
   private String name;
 
   @Column(name = "lastname", nullable = false)
-  @NotEmpty(message = "El apellido del usuario es obligatorio")
   private String lastname;
 
   @Override
