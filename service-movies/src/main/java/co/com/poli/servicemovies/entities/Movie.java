@@ -21,16 +21,12 @@ public class Movie {
     @Column(name = "id", updatable = false, nullable = false, unique = true)
     private Long id;
 
-    @NotEmpty(message = "El titulo no debe estar vacío")
     @Column(name = "title")
     private String title;
 
-    @NotEmpty(message = "El director no debe estar vacio")
     @Column(name = "director")
     private String director;
 
-    @Min(value = 1)
-    @Max(value = 5)
     @Column(name = "rating")
     private Integer rating;
 

@@ -1,16 +1,19 @@
 package co.com.poli.servicemovies.controllers;
 
+import co.com.poli.servicemovies.dto.MovieDto;
 import co.com.poli.servicemovies.entities.Movie;
 import co.com.poli.servicemovies.services.MovieService;
 import com.example.multimodule.service.CommonService;
 import com.example.multimodule.service.utils.Response;
 import com.example.multimodule.service.utils.ResponseBuilder;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/movies")
@@ -19,15 +22,19 @@ public class MovieController {
     private final MovieService movieService;
     private final ResponseBuilder responseBuilder;
     private final CommonService commonService;
+    private final ModelMapper modelMapper;
 
     @PostMapping
-    public Response createMovie(@Valid @RequestBody Movie movie, BindingResult result){
+    public Response createMovie(@Valid @RequestBody MovieDto movieDto, BindingResult result){
         if (result.hasErrors()) {
             return responseBuilder.failed(commonService.formatMessage(result));
         }
 
+        Movie movie = modelMapper.map(movieDto,Movie.class);
         movieService.save(movie);
-        return responseBuilder.success(movie);
+        MovieDto movieDtoRespuesta = modelMapper.map(movie, MovieDto.class);
+
+        return responseBuilder.success(movieDtoRespuesta);
     }
 
     @GetMapping
@@ -38,7 +45,11 @@ public class MovieController {
             return responseBuilder.failed(null);
         }
 
-        return responseBuilder.success(movies);
+        List <MovieDto> moviesDto = movies.stream()
+                .map(movie -> modelMapper.map(movie,MovieDto.class))
+                .collect(Collectors.toList());
+
+        return responseBuilder.success(moviesDto);
     }
 
     @GetMapping("/{id}")
@@ -49,7 +60,9 @@ public class MovieController {
             return responseBuilder.failed(null);
         }
 
-        return responseBuilder.success(movie);
+        MovieDto movieDto = modelMapper.map(movie,MovieDto.class);
+
+        return responseBuilder.success(movieDto);
     }
 
     @DeleteMapping("/{id}")
@@ -61,6 +74,8 @@ public class MovieController {
         }
 
         movieService.delete(movie);
-        return responseBuilder.success(movie);
+        MovieDto movieDto = modelMapper.map(movie,MovieDto.class);
+
+        return responseBuilder.success(movieDto);
     }
 }
