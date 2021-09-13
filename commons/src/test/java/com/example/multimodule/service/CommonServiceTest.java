@@ -9,14 +9,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest("service.message=Hello")
-public class MyServiceTest {
+public class CommonServiceTest {
 
 	@Autowired
-	private MyService myService;
+	private CommonService commonService;
 
 	@Test
 	public void contextLoads() {
-		assertThat(myService.message()).isNotNull();
+		assertThat(commonService.message()).isNotNull();
 	}
 
 	@SpringBootApplication

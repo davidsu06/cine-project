@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class MyService {
+public class CommonService {
 
 	public String formatMessage(BindingResult result){
 		List<Map<String,String>> errors = result.getFieldErrors().stream()

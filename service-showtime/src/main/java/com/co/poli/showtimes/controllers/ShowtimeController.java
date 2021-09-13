@@ -2,7 +2,7 @@ package com.co.poli.showtimes.controllers;
 
 import com.co.poli.showtimes.entities.Showtime;
 import com.co.poli.showtimes.services.ShowtimeService;
-import com.example.multimodule.service.MyService;
+import com.example.multimodule.service.CommonService;
 import com.example.multimodule.service.utils.Response;
 import com.example.multimodule.service.utils.ResponseBuilder;
 import lombok.AllArgsConstructor;
@@ -18,12 +18,12 @@ import java.util.List;
 public class ShowtimeController {
   private  final ShowtimeService showtimeService;
   private  final ResponseBuilder responseBuilder;
-  private  final MyService myService;
+  private  final CommonService commonService;
 
   @PostMapping
   public Response createShowtime (@Valid @RequestBody Showtime showtime, BindingResult result) {
     if (result.hasErrors()) {
-      return responseBuilder.failed(myService.formatMessage(result));
+      return responseBuilder.failed(commonService.formatMessage(result));
     }
 
     showtimeService.createShowtime(showtime);

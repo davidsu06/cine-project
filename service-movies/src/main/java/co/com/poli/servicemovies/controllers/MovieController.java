@@ -2,7 +2,7 @@ package co.com.poli.servicemovies.controllers;
 
 import co.com.poli.servicemovies.entities.Movie;
 import co.com.poli.servicemovies.services.MovieService;
-import com.example.multimodule.service.MyService;
+import com.example.multimodule.service.CommonService;
 import com.example.multimodule.service.utils.Response;
 import com.example.multimodule.service.utils.ResponseBuilder;
 import lombok.RequiredArgsConstructor;
@@ -18,12 +18,12 @@ import java.util.List;
 public class MovieController {
     private final MovieService movieService;
     private final ResponseBuilder responseBuilder;
-    private final MyService myService;
+    private final CommonService commonService;
 
     @PostMapping
     public Response createMovie(@Valid @RequestBody Movie movie, BindingResult result){
         if (result.hasErrors()) {
-            return responseBuilder.failed(myService.formatMessage(result));
+            return responseBuilder.failed(commonService.formatMessage(result));
         }
 
         movieService.save(movie);

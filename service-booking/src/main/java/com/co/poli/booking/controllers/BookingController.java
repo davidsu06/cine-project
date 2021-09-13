@@ -2,11 +2,10 @@ package com.co.poli.booking.controllers;
 
 import com.co.poli.booking.entities.Booking;
 import com.co.poli.booking.services.BookingService;
-import com.example.multimodule.service.MyService;
+import com.example.multimodule.service.CommonService;
 import com.example.multimodule.service.utils.Response;
 import com.example.multimodule.service.utils.ResponseBuilder;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,12 +18,12 @@ import java.util.List;
 public class BookingController {
   private final BookingService bookingService;
   private final ResponseBuilder responseBuilder;
-  private final MyService myService;
+  private final CommonService commonService;
 
   @PostMapping
   public Response createBooking (@Valid @RequestBody Booking booking, BindingResult result) {
     if (result.hasErrors()) {
-      return responseBuilder.failed(myService.formatMessage(result));
+      return responseBuilder.failed(commonService.formatMessage(result));
     }
 
     bookingService.createBooking(booking);

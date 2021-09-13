@@ -1,6 +1,6 @@
 package com.co.poli.user;
 
-import com.example.multimodule.service.MyService;
+import com.example.multimodule.service.CommonService;
 import com.example.multimodule.service.utils.ResponseBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class BeansConfiguration {
   @Bean
-  public MyService myService() {
-    return new MyService();
+  public CommonService myService() {
+    return new CommonService();
   }
 
   @Bean

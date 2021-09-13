@@ -2,7 +2,7 @@ package com.co.poli.user.controllers;
 
 import com.co.poli.user.entities.User;
 import com.co.poli.user.services.UserService;
-import com.example.multimodule.service.MyService;
+import com.example.multimodule.service.CommonService;
 import com.example.multimodule.service.utils.Response;
 import com.example.multimodule.service.utils.ResponseBuilder;
 import lombok.RequiredArgsConstructor;
@@ -18,12 +18,12 @@ import java.util.List;
 public class UserController {
   private final UserService userService;
   private final ResponseBuilder responseBuilder;
-  private final MyService myService;
+  private final CommonService commonService;
 
   @PostMapping
   public Response createUser(@Valid @RequestBody User user, BindingResult result){
     if (result.hasErrors()) {
-      return responseBuilder.failed(myService.formatMessage(result));
+      return responseBuilder.failed(commonService.formatMessage(result));
     }
 
     userService.createUser(user);
